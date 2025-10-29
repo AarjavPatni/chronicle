@@ -1,30 +1,32 @@
 # Chronicle
 
-A distributed commit log service implemented in Rust, following the concepts from Travis Jeffery's "Distributed Services with Go".
+A self-contained, persistent event-stream service that records and serves events in chronological order. Built using Rust instead of Go, it follows the learning path outlined in "Distributed Services with Go: Your Guide to Reliable, Scalable, and Maintainable Systems" by Travis Jeffery (Pragmatic Bookshelf, 2021).
 
-## About This Project
+## Project Roadmap
 
-This project implements a distributed event-streaming system using Rust instead of Go, following the learning path outlined in the book "Distributed Services with Go: Your Guide to Reliable, Scalable, and Maintainable Systems" by Travis Jeffery (Pragmatic Bookshelf, 2021).
+This project progresses through four distinct phases, each building upon the previous:
 
-### About the Book
+### Phase 1: Getting Started - Persisting Events in a Log
+- [x] Core event log data structure
+- [x] Event append and read operations
+- [ ] HTTP API for event production and consumption
+- [ ] Local file persistence
 
-"Distributed Services with Go" teaches you to build distributed systems from the ground up by creating a complete, self-contained, persistent event-stream service. The book covers:
+### Phase 2: Network - Building a Single Instance Networked Service  
+- [ ] gRPC client and server implementation
+- [ ] Protocol buffer definitions
+- [ ] Network communication and serialization
 
-- Building networked, secure clients and servers with gRPC
-- Creating observable services with metrics, logs, and traces
-- Implementing service discovery and consensus algorithms
-- Operating Certificate Authorities for internal TLS authentication
-- Using the Raft consensus algorithm for distributed coordination
-- Deploying to the cloud with Kubernetes
+### Phase 3: Distribute - Distributing as a Cluster
+- [ ] Service discovery mechanisms
+- [ ] Raft consensus algorithm implementation
+- [ ] Cluster coordination and replication
 
-### This Rust Implementation
+### Phase 4: Deploy - Deploying the Cluster
+- [ ] Kubernetes deployment configurations
+- [ ] Container orchestration
+- [ ] Production monitoring and observability
 
-While the original book uses Go, this project translates those concepts to Rust, providing:
-
-- A commit log data structure for storing and retrieving records
-- HTTP API endpoints for producing and consuming log entries
-- Thread-safe operations using Rust's ownership model
-- JSON serialization for network communication
 
 ## Getting Started
 
@@ -41,8 +43,8 @@ While the original book uses Go, this project translates those concepts to Rust,
 
 ### API Endpoints
 
-- `POST /` - Append a record to the log
-- `GET /?offset=N` - Retrieve a record at the given offset
+- `POST /` - Append an event to the log
+- `GET /?offset=N` - Retrieve an event at the given offset
 
 ## Project Structure
 
@@ -51,7 +53,7 @@ src/
 ├── main.rs          # Application entry point
 ├── server/
 │   ├── mod.rs       # Server module exports
-│   ├── log.rs       # Core log data structure
+│   ├── log.rs       # Core event log data structure
 │   └── http.rs      # HTTP handlers and routes
 ```
 
@@ -59,21 +61,11 @@ src/
 
 This project serves as a hands-on way to learn:
 
-- Distributed systems concepts through practical implementation
+- Event streaming and persistent log concepts
+- Distributed systems patterns through practical implementation
 - Rust's approach to concurrent, safe systems programming
 - Translation patterns between Go and Rust architectures
-- Building HTTP APIs with modern Rust web frameworks
-
-## Development Status
-
-- [x] Basic log data structure (Record, Log)
-- [x] Append and read operations
-- [x] HTTP server dependencies
-- [ ] HTTP API endpoints
-- [ ] JSON request/response handling
-- [ ] Error handling and validation
-- [ ] Persistence layer
-- [ ] Distributed features (future)
+- Building networked services from HTTP to gRPC to clusters
 
 ## License
 
